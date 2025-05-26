@@ -1,0 +1,16 @@
+.area {
+  width: 340px;
+  height: 340px;
+  border-radius: 28px;
+  background: #d5ebf5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.area img {
+  width: 70%;
+  object-fit: contain;
+}

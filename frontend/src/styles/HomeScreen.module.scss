@@ -1,0 +1,27 @@
+/* Fondo general y layout */
+.container {
+  min-height: 100vh;
+  background: #d4e7ec;          /* azul verdoso suave */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem 1rem;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  text-align: center;
+  color: #004861;
+  margin-bottom: 2.5rem;
+}
+
+/* Grid de 2x2 para los botones */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.75rem;
+  width: 100%;
+  max-width: 780px;
+}

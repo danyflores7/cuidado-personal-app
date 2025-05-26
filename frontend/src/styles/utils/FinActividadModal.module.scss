@@ -1,0 +1,24 @@
+.backdrop {
+  position: fixed; inset: 0;
+  background: rgba(#000, .4);
+  display: grid;
+  place-items: center;
+  z-index: 50;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 40px;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(0,0,0,.2);
+
+  img { width: 80px; margin-bottom: 16px; }
+  h2 { color:#004861; margin-bottom: 8px; }
+  p  { margin-bottom: 24px; font-size:1.1rem; }
+
+  button {
+    background:#004861; color:#fff; border:none; padding:10px 24px;
+    border-radius:8px; font-size:1rem; cursor:pointer;
+  }
+}

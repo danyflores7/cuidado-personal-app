@@ -1,0 +1,34 @@
+// Tarjeta-botón (tamaño cuadrado, esquinas redondeadas)
+.card {
+  width: 240px;
+  height: 240px;
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 4px 8px rgba(0,0,0,.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,.15);
+  }
+}
+
+.icon {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+}
+
+.label {
+  color: #004861;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-align: center;
+  line-height: 1.25;
+}
