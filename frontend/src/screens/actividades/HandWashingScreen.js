@@ -27,7 +27,7 @@ export default function HandWashingScreen() {
         setShowModal(true);          // ¡actividad terminada!
         setEstadoManos('seco');
       } else {
-        setEstadoManos('base');
+        //setEstadoManos('base');
         siguientePaso();
       }
     }, 1200);

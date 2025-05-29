@@ -1,0 +1,28 @@
+.container{
+  min-height:100vh;
+  padding:32px 16px;
+  background:#cfeff0;
+  display:flex;flex-direction:column;align-items:center;
+}
+
+.titulo{
+  font-size:2rem;
+  font-weight:700;
+  color: #004861;
+  text-align:center;
+  margin-bottom:24px;
+}
+
+.objetos{
+  margin-top:36px;
+  display:flex;gap:24px;
+}
+
+.progreso{
+  position:fixed;bottom:24px;right:24px;
+  font-weight:600;font-size:1.2rem;color: #004861;
+}
+
+.help{
+  position:fixed;top:24px;right:24px;width:40px;cursor:pointer;
+}

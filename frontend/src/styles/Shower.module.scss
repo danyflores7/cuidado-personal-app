@@ -1,0 +1,53 @@
+@use './Global.scss' as g;
+
+.container {
+  min-height: 100vh;
+  background: #f5f9fa;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titulo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #004861;   /* #004861 en tu hoja global */
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.objetos {
+  margin-top: 40px;
+  display: flex;
+  gap: 24px;
+}
+
+.progreso {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #004861;
+}
+
+.help {
+  width: 220px;     // o el tamaño deseado
+  height: 220px;
+  object-fit: contain;  // evita que se deforme
+  //position: fixed;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.avatarFijo {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  pointer-events: none; // evita arrastres no deseados si aplica
+}

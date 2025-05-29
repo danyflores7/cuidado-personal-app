@@ -9,11 +9,12 @@ import washIcon    from '../assets/lavarse_manos.png';
 import showerIcon  from '../assets/darse_ducha.png';
 import toiletIcon  from '../assets/ir_bano.png';
 import teethIcon   from '../assets/cepillarse_dientes.png';
+import clssifyIcon   from '../assets/clasificar.png';
 // Asegúrate de haber renombrado los archivos en /assets sin espacios ❗
 
 const HomeScreen = () => {
   const navigate = useNavigate();
-
+  
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>¡Hola! Vamos a aprender<br />a cuidar de ti</h1>
@@ -45,6 +46,13 @@ const HomeScreen = () => {
           label="Cepillarse los dientes"
           bg="#7fcbd5"
           onClick={() => navigate('/dientes')}
+        />
+
+        <CustomButton
+          icon={clssifyIcon}
+          label="Clasificar acciones bien y mal"
+          bg="#7fcbd5"
+          onClick={() => navigate('/bien-mal')}
         />
       </div>
     </div>
