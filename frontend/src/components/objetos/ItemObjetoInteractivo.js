@@ -17,14 +17,15 @@ const objetosImg = {
   vaso: require('../../assets/vaso.png')
 };
 
-
-export default function ItemObjetoInteractivo({ id, bg = '#ffd0d0', deshabilitado }) {
+export default function ItemObjetoInteractivo({ id, bg = '#ffd0d0' }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: OBJETO_TYPE,
     item: { id },
-    canDrag: !deshabilitado,
-    collect: monitor => ({ isDragging: !!monitor.isDragging() })
-  }), [deshabilitado]);
+    canDrag: true, // 🔓 todos se pueden arrastrar
+    collect: monitor => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }), [id]);
 
   return (
     <div
@@ -32,12 +33,11 @@ export default function ItemObjetoInteractivo({ id, bg = '#ffd0d0', deshabilitad
       className={styles.card}
       style={{
         backgroundColor: bg,
-        opacity: isDragging || deshabilitado ? 0.4 : 1,
-        cursor: deshabilitado ? 'default' : 'grab'
+        opacity: isDragging ? 0.4 : 1,
+        cursor: 'grab',
       }}
     >
-      <img src={objetosImg[id]} alt={id} draggable={false}/>
+      <img src={objetosImg[id]} alt={id} draggable={false} />
     </div>
   );
 }
-

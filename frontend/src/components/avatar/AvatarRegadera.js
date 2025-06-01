@@ -14,12 +14,21 @@ const imgs = {
 export default function AvatarRegadera({ estado, onObjetoCorrecto }) {
   const [, drop] = useDrop(() => ({
     accept: OBJETO_TYPE,
-    drop:   ({ id }) => onObjetoCorrecto(id)
+    drop: ({ id }) => onObjetoCorrecto(id)
   }), [onObjetoCorrecto]);
 
   return (
     <div ref={drop} className={styles.regaderaArea}>
-      <img src={imgs[estado] ?? imgs.base} alt="avatar ducha" draggable={false}/>
+      {/* Fondo de la regadera */}
+      <div className={styles.fondo}>
+        <img src={require('../../assets/fondo_ducha.png')} alt="fondo ducha" draggable={false} />
+      </div>
+
+      {/* Avatar superpuesto */}
+      <div className={styles.avatar}>
+        <img src={imgs[estado] ?? imgs.base} alt="avatar ducha" draggable={false} />
+      </div>
     </div>
   );
 }
+

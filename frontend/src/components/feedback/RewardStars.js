@@ -2,6 +2,8 @@
 import React from 'react';
 import styles from '../../styles/utils/RewardStars.module.scss';
 import estrella from '../../assets/estrella.png';
+import starFx from '../../assets/audio/ui/star.mp3';
+
 
 export default function RewardStars() {
   return (
@@ -9,6 +11,7 @@ export default function RewardStars() {
       src={estrella}
       alt="star"
       className={styles.star}
+      
     />
   );
 }

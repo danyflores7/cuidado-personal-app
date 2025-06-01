@@ -8,6 +8,9 @@ import ItemObjeto from '../../components/objetos/ItemObjetoInteractivo';
 import AvatarCepillado from '../../components/avatar/AvatarCepillado';
 import RewardStars from '../../components/feedback/RewardStars';
 import FinActividadModal from '../../components/feedback/FinActividadModal';
+import NarrationPlayer from '../../components/audio/NarrationPlayer';
+import { Howl } from 'howler';
+
 
 import styles from '../../styles/utils/ToothBrushing.module.scss';
 import ayudaIcon from '../../assets/icono_ayuda.png';
@@ -20,35 +23,67 @@ export default function ToothBrushingScreen(){
   const [star,setStar]     = useState(false);
   const [fin,setFin]       = useState(false);
   const nav = useNavigate();
+  const [feedbackIncorrecto, setFeedbackIncorrecto] = useState(false);
 
-  const onDrop = (id)=>{
-    if(pasoActual.objetivo!==id)return;
+  const sonidosPorObjeto = {
+    pasta: require('../../assets/audio/toothbrushing/pasta.mp3'),
+    cepillo: require('../../assets/audio/toothbrushing/cepillar.mp3'),
+    vaso: require('../../assets/audio/toothbrushing/enjuagar.mp3'),
+  };
+
+  const onDrop = (id) => {
+    if (pasoActual.objetivo !== id) {
+      setFeedbackIncorrecto(true);
+      setTimeout(() => setFeedbackIncorrecto(false), 1500);
+      return;
+    }
     avanzar();
   };
 
-  const onClickAvatar = ()=>{
-    if(pasoActual.objetivo==='cepillar') avanzar();
+  const onClickAvatar = () => {
+    if (pasoActual.objetivo === 'cepillar') {
+      avanzar(); // avanza y reproduce sonido en paralelo
+    }
   };
 
-  const avanzar = ()=>{
-    setEstado(pasoActual.feedback);
-    setStar(true);
-    setTimeout(()=>{
+  const avanzar = () => {
+    setEstado(pasoActual.feedback);  // cambia imagen/avatar
+    setStar(true);                   // muestra estrella
+
+    // Reproduce el sonido del objeto actual (en paralelo)
+    const src = sonidosPorObjeto[pasoActual.objetivo];
+    if (src) {
+      const sonido = new Howl({ src: [src], volume: 1 });
+      sonido.play(); // se reproduce mientras muestra estrella
+    }
+
+    setTimeout(() => {
       setStar(false);
-      if(esUltimo) setFin(true);
-      else {siguiente(); }
-    },1100);
+      if (esUltimo) setFin(true);
+      else siguiente();
+    }, 2000); 
   };
 
   return(
     <DndProvider backend={HTML5Backend}>
       <div className={styles.container}>
+        {/* Narración del paso */}
+        <NarrationPlayer
+          src={pasoActual.audio}
+          playTrigger={idx}     // cambia cada vez que avanzas
+        />
         <img src={ayudaIcon} alt="help" className={styles.help}
              onClick={()=>alert('Arrastra el objeto correcto o toca el avatar para continuar')} />
 
         <h1 className={styles.titulo}>{pasoActual.titulo}</h1>
 
         <AvatarCepillado estado={estado} onDropCorrecto={onDrop} onClickAvatar={onClickAvatar}/>
+
+        {feedbackIncorrecto && (
+          <div className={styles.intentaDeNuevo}>
+            Intenta de nuevo
+          </div>
+        )}
 
         <div className={styles.objetos}>
           {pasoActual.objetos.map(o=>(

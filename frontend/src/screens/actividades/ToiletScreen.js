@@ -8,6 +8,8 @@ import ItemObjeto, { OBJETO_TYPE } from '../../components/objetos/ItemObjetoInte
 import AvatarBano from '../../components/avatar/AvatarBano';
 import RewardStars from '../../components/feedback/RewardStars';
 import FinActividadModal from '../../components/feedback/FinActividadModal';
+import NarrationPlayer from '../../components/audio/NarrationPlayer';
+import { Howl } from 'howler';
 
 import styles from '../../styles/utils/Toilet.module.scss';
 import ayudaIcon from '../../assets/icono_ayuda.png';
@@ -20,18 +22,35 @@ export default function ToiletScreen() {
   const [star, setStar]       = useState(false);
   const [fin, setFin]         = useState(false);
   const navigate              = useNavigate();
+  const [feedbackIncorrecto, setFeedbackIncorrecto] = useState(false);
+  const sonidoFinal = new Howl({
+    src: [require('../../assets/audio/toilet/toilet.mp3')],
+    volume: 1,
+    onend: () => setFin(true)
+  });
+
 
   const onAccion = (id) => {
-    if (pasoActual.objetivo !== id) return;            // objeto incorrecto
+    if (pasoActual.objetivo !== id) {
+      setFeedbackIncorrecto(true);
+      setTimeout(() => setFeedbackIncorrecto(false), 1500); // Oculta el mensaje después de 1.5s
+      return;
+    }
+
     setEstado(pasoActual.feedback);
     setStar(true);
 
     setTimeout(() => {
       setStar(false);
-      if (esUltimo) setFin(true);
-      else {siguiente(); }
-    }, 1100);
+      if (esUltimo) {
+        sonidoFinal.play();
+        setTimeout(() => setFin(true), 2000);
+      } else {
+        siguiente();
+      }
+    }, 2000);
   };
+
 
   // Nueva función para clic directo en avatar en paso 2
     const onClickAvatar = () => {
@@ -50,12 +69,23 @@ export default function ToiletScreen() {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className={styles.container}>
+        {/* Narración del paso */}
+        <NarrationPlayer
+          src={pasoActual.audio}
+          playTrigger={idx}     // cambia cada vez que avanzas
+        />
         <img src={ayudaIcon} alt="help" className={styles.help}
              onClick={()=>alert('Arrastra el objeto correcto hacia el avatar')} />
 
         <h2 className={styles.titulo}>{pasoActual.titulo}</h2>
 
         <AvatarBano estado={estado} onDropCorrecto={onAccion} onClick={onClickAvatar} />
+
+        {feedbackIncorrecto && (
+          <div className={styles.intentaDeNuevo}>
+            Intenta de nuevo
+          </div>
+        )}
 
         <div className={styles.objetos}>
           {pasoActual.objetos.map(o=>(

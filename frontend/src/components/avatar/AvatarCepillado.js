@@ -11,19 +11,22 @@ const imgs = {
 };
 
 export default function AvatarCepillado({ estado, onDropCorrecto, onClickAvatar }) {
-  // AvatarBano.js
-const [, drop] = useDrop(
-  () => ({
+  const [, drop] = useDrop(() => ({
     accept: OBJETO_TYPE,
     drop: ({ id }) => onDropCorrecto(id)
-  }),
-  [onDropCorrecto]            // ⬅️ antes era [estado]
-);
-
+  }), [onDropCorrecto]);
 
   return (
     <div ref={drop} className={styles.cepilladoArea} onClick={onClickAvatar}>
-      <img src={imgs[estado] ?? imgs.base} alt="avatar dientes" draggable={false}/>
+      {/* Fondo detrás del avatar */}
+      <div className={styles.fondo}>
+        <img src={require('../../assets/fondo_cepillado.png')} alt="fondo cepillado" draggable={false} />
+      </div>
+
+      {/* Avatar encima del fondo */}
+      <div className={styles.avatar}>
+        <img src={imgs[estado] ?? imgs.base} alt="avatar dientes" draggable={false} />
+      </div>
     </div>
   );
 }
