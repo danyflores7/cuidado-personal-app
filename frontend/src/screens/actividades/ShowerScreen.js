@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import ProveedorArrastre from '../../components/objetos/ProveedorArrastre';
 
 import { usePasosShower } from '../../hooks/usePasosActividad';
 import ItemObjeto, { OBJETO_TYPE } from '../../components/objetos/ItemObjetoInteractivo';
@@ -60,7 +59,7 @@ const onAccion = (id) => {
 
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <ProveedorArrastre>
       <div className={styles.container}>
         {/* Narración del paso */}
         <NarrationPlayer
@@ -98,6 +97,6 @@ const onAccion = (id) => {
         {showStar && <RewardStars />}
         {fin && <FinActividadModal texto="¡Genial! Terminaste tu ducha." volver={()=>navigate('/')}/>}
       </div>
-    </DndProvider>
+    </ProveedorArrastre>
   );
 }

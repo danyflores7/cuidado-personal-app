@@ -7,15 +7,15 @@ export const PICTO_TYPE = 'PICTOGRAMA';
 export default function PictogramaDraggable({ id, imagen, descripcion }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: PICTO_TYPE,
-    item: { id },
+    item: { id, imagen },
     collect: monitor => ({ isDragging: !!monitor.isDragging() })
-  }), [id]);
+  }), [id, imagen]);
 
   return (
     <div
       ref={drag}
       className={styles.pictograma}
-      style={{ opacity: isDragging ? 0.4 : 1 }}
+      style={{ opacity: isDragging ? 0.4 : 1, touchAction: 'none' }}
     >
       <img src={imagen} alt={descripcion} draggable={false}/>
       <span>{descripcion}</span>

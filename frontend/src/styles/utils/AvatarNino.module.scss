@@ -84,3 +84,27 @@
   height: 100%;
   object-fit: contain;
 }
+
+/* Área del baño: la imagen no debe salirse de la pantalla */
+.banoArea {
+  max-width: 100%;
+}
+
+.banoArea img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Teléfonos: las áreas se ajustan al ancho de la pantalla */
+@media (max-width: 600px) {
+  .area {
+    width: min(340px, 88vw);
+    height: min(340px, 88vw);
+  }
+
+  .regaderaArea,
+  .cepilladoArea {
+    width: min(500px, 92vw);
+    height: min(500px, 92vw);
+  }
+}

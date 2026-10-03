@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import ProveedorArrastre from '../../components/objetos/ProveedorArrastre';
 
 import { usePasosToothbrushing } from '../../hooks/usePasosActividad';
 import ItemObjeto from '../../components/objetos/ItemObjetoInteractivo';
@@ -27,12 +26,16 @@ export default function ToothBrushingScreen(){
 
   const sonidosPorObjeto = {
     pasta: require('../../assets/audio/toothbrushing/pasta.mp3'),
-    cepillo: require('../../assets/audio/toothbrushing/cepillar.mp3'),
+    cepillar: require('../../assets/audio/toothbrushing/cepillar.mp3'),
     vaso: require('../../assets/audio/toothbrushing/enjuagar.mp3'),
   };
 
   const onDrop = (id) => {
-    if (pasoActual.objetivo !== id) {
+    // En el paso de cepillar el cepillo es el único objeto en pantalla: arrastrarlo
+    // también cuenta, igual que tocar al niño.
+    const esCorrecto = pasoActual.objetivo === id
+      || (pasoActual.objetivo === 'cepillar' && id === 'cepillo');
+    if (!esCorrecto) {
       setFeedbackIncorrecto(true);
       setTimeout(() => setFeedbackIncorrecto(false), 1500);
       return;
@@ -65,7 +68,7 @@ export default function ToothBrushingScreen(){
   };
 
   return(
-    <DndProvider backend={HTML5Backend}>
+    <ProveedorArrastre>
       <div className={styles.container}>
         {/* Narración del paso */}
         <NarrationPlayer
@@ -96,6 +99,6 @@ export default function ToothBrushingScreen(){
         {star && <RewardStars />}
         {fin && <FinActividadModal texto="¡Muy bien! Tus dientes están limpios." volver={()=>nav('/')}/>}
       </div>
-    </DndProvider>
+    </ProveedorArrastre>
   );
 }

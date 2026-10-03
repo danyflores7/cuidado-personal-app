@@ -17,3 +17,16 @@
     pointer-events: none;
   }
 }
+
+/* Teléfonos: tarjetas más chicas para que quepan en una fila */
+@media (max-width: 600px) {
+  .card {
+    width: 96px;
+    height: 96px;
+
+    img {
+      width: 56px;
+      height: 56px;
+    }
+  }
+}

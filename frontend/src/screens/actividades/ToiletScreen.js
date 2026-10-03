@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import ProveedorArrastre from '../../components/objetos/ProveedorArrastre';
 
 import { usePasosToilet } from '../../hooks/usePasosActividad';
 import ItemObjeto, { OBJETO_TYPE } from '../../components/objetos/ItemObjetoInteractivo';
@@ -67,7 +66,7 @@ export default function ToiletScreen() {
 
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <ProveedorArrastre>
       <div className={styles.container}>
         {/* Narración del paso */}
         <NarrationPlayer
@@ -103,6 +102,6 @@ export default function ToiletScreen() {
         {star && <RewardStars />}
         {fin && <FinActividadModal texto="¡Muy bien, has terminado!" volver={()=>navigate('/')}/>}
       </div>
-    </DndProvider>
+    </ProveedorArrastre>
   );
 }

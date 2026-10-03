@@ -1,5 +1,6 @@
 /* Fondo general y layout */
 .container {
+  position: relative;
   min-height: 90vh;
   background: #d4e7ec;          /* azul verdoso suave */
   display: flex;
@@ -15,6 +16,16 @@
   text-align: center;
   color: #004861;
   margin-bottom: 3.5rem;
+}
+
+/* Enlace de regreso a la web de Valora */
+.volver {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #004861;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 /* Grid de 2x2 para los botones */

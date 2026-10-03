@@ -20,12 +20,12 @@ const objetosImg = {
 export default function ItemObjetoInteractivo({ id, bg = '#ffd0d0' }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: OBJETO_TYPE,
-    item: { id },
+    item: { id, imagen: objetosImg[id], fondo: bg },
     canDrag: true, // 🔓 todos se pueden arrastrar
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
-  }), [id]);
+  }), [id, bg]);
 
   return (
     <div
@@ -35,6 +35,7 @@ export default function ItemObjetoInteractivo({ id, bg = '#ffd0d0' }) {
         backgroundColor: bg,
         opacity: isDragging ? 0.4 : 1,
         cursor: 'grab',
+        touchAction: 'none',
       }}
     >
       <img src={objetosImg[id]} alt={id} draggable={false} />

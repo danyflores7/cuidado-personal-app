@@ -17,6 +17,9 @@ const HomeScreen = () => {
   
   return (
     <div className={styles.container}>
+      {/* Enlace normal (no del router) porque la web de Valora está fuera del juego */}
+      <a href="/" className={styles.volver}>← Volver a valoraac.org</a>
+
       <h1 className={styles.title}>¡Hola! Vamos a aprender<br />a cuidar de ti</h1>
 
       <div className={styles.grid}>

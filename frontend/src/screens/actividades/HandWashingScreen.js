@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import ProveedorArrastre from '../../components/objetos/ProveedorArrastre';
 import usePasosActividad from '../../hooks/usePasosActividad';
 import ItemObjeto from '../../components/objetos/ItemObjetoInteractivo';
 import ManosZona from '../../components/avatar/ManosZonaObjetivo';
@@ -52,7 +51,7 @@ export default function HandWashingScreen() {
   };
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <ProveedorArrastre>
       <div className={styles.container}>
          {/* Narración del paso */}
          <NarrationPlayer
@@ -87,6 +86,6 @@ export default function HandWashingScreen() {
         {/* Estrella animada */}
         {showModal && <FinActividadModal />}
       </div>
-    </DndProvider>
+    </ProveedorArrastre>
   );
 }

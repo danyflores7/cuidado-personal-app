@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import ProveedorArrastre from '../../components/objetos/ProveedorArrastre';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -43,7 +42,7 @@ const manejarDrop = useCallback((idAccion, tipoZona) => {
 }, [accionActual, esUltimo]);
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <ProveedorArrastre>
       <div className={styles.container}>
 
         <img src={ayudaIcon} alt="ayuda"
@@ -83,6 +82,6 @@ const manejarDrop = useCallback((idAccion, tipoZona) => {
           />
         }
       </div>
-    </DndProvider>
+    </ProveedorArrastre>
   );
 }
